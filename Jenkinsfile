@@ -2,9 +2,12 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('build') {
             steps {
-                echo 'Hello World'
+               script {
+				   def exitCode = powershell(returnStatus: true, script: ".\\build.ps1")
+				   echo "build.ps1 exited with ${exitCode}"
+			   }
             }
         }
     }
